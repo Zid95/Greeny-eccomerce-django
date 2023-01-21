@@ -11,15 +11,16 @@ PRODUCT_FLAG = (
 )
 
 class Product(models.Model):
-    name = models.CharField(max_length=150)
-    image = models.ImageField(upload_to='products',default='default.png')
-    flag = models.CharField(choices=PRODUCT_FLAG,max_length=10)
-    price = models.FloatField()
-    sku = models.IntegerField()
-    brand = models.ForeignKey('Brand',related_name='product_brand',on_delete=models.CASCADE)
-    tags = TaggableManager()
-    subtitle = models.TextField(max_length=500)
-    description = models.TextField(max_length=20000)
+    name = models.CharField(_('name'),max_length=150)
+    image = models.ImageField(_('image'),upload_to='products/',default='default.png')
+    flag = models.CharField(_('flag'),max_length=10,choices=PRODUCT_FLAG)
+    price = models.FloatField(_('price'))
+    sku = models.IntegerField(_('sku'))
+    brand = models.ForeignKey('Brand',verbose_name=_('brand'),related_name='product_brand',on_delete=models.CASCADE)
+    tags =  TaggableManager()
+    subtitle = models.TextField(_('subtitle'),max_length=500)
+    description = models.TextField(_('description'),max_length=20000)
+    slug = models.SlugField(null=True,blank=True)
 
     def __str__(self) -> str:
         return self.name
