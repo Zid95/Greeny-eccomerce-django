@@ -48,7 +48,7 @@ class Brand(models.Model):
 
 
 class Reviews(models.Model):
-    user = models.ForeignKey(User,verbose_name=_('user'),related_name='review_author',on_delete=models.SET_NULL ,nul=True,blank=True)
+    user = models.ForeignKey(User,verbose_name=_('user'),related_name='review_author',on_delete=models.SET_NULL ,null=True,blank=True)
     product = models.ForeignKey(Product,verbose_name=_('product'),related_name='product_review',on_delete=models.CASCADE)
     comment = models.CharField(_('comment'),max_length=200)
     rate = models.IntegerField(_('rate'))
