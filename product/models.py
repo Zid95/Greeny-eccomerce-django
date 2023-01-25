@@ -3,6 +3,7 @@ from taggit.managers import TaggableManager
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.utils.text import slugify
 
 
 PRODUCT_FLAG = (
@@ -25,6 +26,10 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    def save(self,*args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Product,self).save(*args, **kwargs)
 
 
 

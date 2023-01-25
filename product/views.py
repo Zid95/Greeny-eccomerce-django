@@ -17,3 +17,4 @@ class ProductList(ListView):
 class ProductDetail(DetailView):
     model = Product
     template_name = 'product/single_product.html'
+    context_object_name = 'pro'
