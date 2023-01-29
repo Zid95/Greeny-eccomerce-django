@@ -1,1 +1,1 @@
-# django-eccomerce
+# django-eccomerce-main
