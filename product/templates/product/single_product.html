@@ -9,7 +9,7 @@
         <!--=====================================
                     BANNER PART START
         =======================================-->
-        <section class="single-banner inner-section" style="background: url(images/single-banner.jpg) no-repeat center;">
+        <section class="single-banner inner-section" style="background: url(images/single-banner.jpg' %}) no-repeat center;">
             <div class="container">
                 <h2>product simple</h2>
                 <ol class="breadcrumb">
@@ -38,7 +38,7 @@
                             </div>
                             <ul class="details-preview"> 
                                 {% for img in pro.product_image.all %}
-                                <li><img src=" {{img.image.url}} " alt="product"></li>
+                                <li><img src="{{img.image.url}} " alt="product"></li>
                                 {% endfor %}
                                 
                             </ul>
@@ -58,7 +58,7 @@
                                     <i class="icofont-arrow-left"></i>
                                     prev product
                                     <span class="product-nav-popup">
-                                        <img src="images/product/02.jpg" alt="product">
+                                        <img src=" {% static 'en/images/product/02.jpg' %}" alt="product">
                                         <small>green chilis</small>
                                     </span>
                                 </a>
@@ -68,7 +68,7 @@
                                     next product
                                     <i class="icofont-arrow-right"></i>
                                     <span class="product-nav-popup">
-                                        <img src="images/product/03.jpg" alt="product">
+                                        <img src=" {% static 'en/images/product/03.jpg' %}" alt="product">
                                         <small>green chilis</small>
                                     </span>
                                 </a>
@@ -97,9 +97,11 @@
                             <div class="details-list-group">
                                 <label class="details-list-title">tags:</label>
                                 <ul class="details-tag-list">
-                                    <li><a href="#">organic</a></li>
-                                    <li><a href="#">fruits</a></li>
-                                    <li><a href="#">chilis</a></li>
+                                    {% for tag in pro.tags.all %}
+                                    <li><a href="#"> {{tag}} </a></li>
+                                    {% endfor %}
+                                    
+
                                 </ul>
                             </div>
                             <div class="details-list-group">
@@ -184,7 +186,7 @@
                                 <li class="review-item">
                                     <div class="review-media">
                                         <a class="review-avatar" href="#">
-                                            <img src="images/avatar/01.jpg" alt="review">
+                                            <img src=" {% static 'en/images/avatar/01.jpg' %}" alt="review">
                                         </a>
                                         <h5 class="review-meta">
                                             <a href="#">miron mahmud</a>
@@ -207,7 +209,7 @@
                                         <li class="review-reply-item">
                                             <div class="review-media">
                                                 <a class="review-avatar" href="#">
-                                                    <img src="images/avatar/02.jpg" alt="review">
+                                                    <img src=" {% static 'en/images/avatar/02.jpg' %}" alt="review">
                                                 </a>
                                                 <h5 class="review-meta">
                                                     <a href="#">labonno khan</a>
@@ -223,7 +225,7 @@
                                         <li class="review-reply-item">
                                             <div class="review-media">
                                                 <a class="review-avatar" href="#">
-                                                    <img src="images/avatar/03.jpg" alt="review">
+                                                    <img src=" {% static 'en/images/avatar/03.jpg' %}" alt="review">
                                                 </a>
                                                 <h5 class="review-meta">
                                                     <a href="#">tahmina bonny</a>
@@ -241,7 +243,7 @@
                                 <li class="review-item">
                                     <div class="review-media">
                                         <a class="review-avatar" href="#">
-                                            <img src="images/avatar/04.jpg" alt="review">
+                                            <img src=" {% static 'en/images/avatar/04.jpg' %}" alt="review">
                                         </a>
                                         <h5 class="review-meta">
                                             <a href="#">shipu shikdar</a>
@@ -332,7 +334,7 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="product-image" href="product-video.html">
-                                    <img src="images/product/01.jpg" alt="product">
+                                    <img src=" {% static 'en/images/product/01.jpg' %}" alt="product">
                                 </a>
                                 <div class="product-widget">
                                     <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -379,7 +381,7 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="product-image" href="product-video.html">
-                                    <img src="images/product/02.jpg" alt="product">
+                                    <img src=" {% static 'en/images/product/02.jpg' %}" alt="product">
                                 </a>
                                 <div class="product-widget">
                                     <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -425,7 +427,7 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="product-image" href="product-video.html">
-                                    <img src="images/product/03.jpg" alt="product">
+                                    <img src=" {% static 'en/images/product/03.jpg' %}" alt="product">
                                 </a>
                                 <div class="product-widget">
                                     <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -471,7 +473,7 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="product-image" href="product-video.html">
-                                    <img src="images/product/04.jpg" alt="product">
+                                    <img src=" {% static 'en/images/product/04.jpg' %}" alt="product">
                                 </a>
                                 <div class="product-widget">
                                     <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -517,7 +519,7 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="product-image" href="product-video.html">
-                                    <img src="images/product/05.jpg" alt="product">
+                                    <img src=" {% static 'en/images/product/05.jpg' %}" alt="product">
                                 </a>
                                 <div class="product-widget">
                                     <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -563,7 +565,7 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="product-image" href="product-video.html">
-                                    <img src="images/product/06.jpg" alt="product">
+                                    <img src=" {% static 'en/images/product/06.jpg' %}" alt="product">
                                 </a>
                                 <div class="product-widget">
                                     <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -609,7 +611,7 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="product-image" href="product-video.html">
-                                    <img src="images/product/07.jpg" alt="product">
+                                    <img src=" {% static 'en/images/product/07.jpg' %}" alt="product">
                                 </a>
                                 <div class="product-widget">
                                     <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -655,7 +657,7 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="product-image" href="product-video.html">
-                                    <img src="images/product/08.jpg" alt="product">
+                                    <img src=" {% static 'en/images/product/08.jpg' %}" alt="product">
                                 </a>
                                 <div class="product-widget">
                                     <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -701,7 +703,7 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="product-image" href="product-video.html">
-                                    <img src="images/product/09.jpg" alt="product">
+                                    <img src=" {% static 'en/images/product/09.jpg' %}" alt="product">
                                 </a>
                                 <div class="product-widget">
                                     <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -747,7 +749,7 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="product-image" href="product-video.html">
-                                    <img src="images/product/10.jpg" alt="product">
+                                    <img src=" {% static 'en/images/product/10.jpg' %}" alt="product">
                                 </a>
                                 <div class="product-widget">
                                     <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
