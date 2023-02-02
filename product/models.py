@@ -22,6 +22,7 @@ class Product(models.Model):
     tags =  TaggableManager()
     subtitle = models.TextField(_('subtitle'),max_length=500)
     description = models.TextField(_('description'),max_length=20000)
+    quantity = models.IntegerField(_('quantity'))
     slug = models.SlugField(null=True,blank=True)
 
     def __str__(self) -> str:
