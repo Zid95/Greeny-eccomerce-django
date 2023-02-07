@@ -59,7 +59,7 @@
                             <div class="product-media">
                                 <div class="product-label">
                                     <label class="label-text {% if pro.flag == 'New' %} new 
-                                    {% elif pro.flag == 'Sale' %} sale
+                                    {% elif pro.flag == 'Sales' %} sale
                                     {% else %} feat
                                     {% endif %}"> {{pro.flag}} </label>
                                 </div>
@@ -108,24 +108,29 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="bottom-paginate">
-                            <p class="page-info">Showing 12 of 60 Results</p>
+                            <p class="page-info">Showing {{page_obj.number}} of {{ page_obj.paginator.num_pages }} Results</p>
                             
-                            {% if is_paginated %}
+                        
                             <ul class="pagination">
+
                                 {% if page_obj.has_previous %}
                                 <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }} "><i class="fas fa-long-arrow-alt-left"></i></a></li>
+                                {% else %}
+                                <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
                                 {% endif %}
                                 {% for i in paginator.page_range %}
                                     {% if page_obj.number == i %}
                                         <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
-                                    {% else %}    
+                                        {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'7' %}
                                         <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
                                     {% endif %}
                                 {% endfor %}
                                 {% if page_obj.has_next %}
-                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-long-arrow-alt-right"></i></a></li>
+                                <li class="page-item"><a class="page-link"  href="?page={{ page_obj.next_page_number }}"><i class="fas fa-long-arrow-alt-right"></i></a></li>
+                                {% else %}
+                                <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
                                 {% endif %}
-                            {% endif %}
+                        
                             </ul>
 
                         </div>

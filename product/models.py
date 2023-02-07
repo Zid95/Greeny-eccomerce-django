@@ -7,7 +7,7 @@ from django.utils.text import slugify
 
 
 PRODUCT_FLAG = (
-    ('Sale','Sales'),
+    ('Sales','Sales'),
     ('Feature','Feature'),
     ('New','New'),
 )

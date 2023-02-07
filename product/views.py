@@ -13,7 +13,8 @@ class ProductList(ListView):
     model = Product
     template_name = 'product/all_products.html'
     context_object_name = 'products'
-    paginate_by = 1
+    paginate_by = 50
+
 
 
 class ProductDetail(DetailView):
@@ -25,7 +26,7 @@ class ProductDetail(DetailView):
 class BrandList(ListView):
     model = Brand
     queryset = Brand.objects.all().annotate(product_count=Count('product_brand'))
-    paginate_by = 1
+    paginate_by = 25
 
 
    
