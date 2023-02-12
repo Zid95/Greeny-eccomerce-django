@@ -1,8 +1,21 @@
 from django.shortcuts import render
 from django.views.generic import *
 from django.db.models import Count
+from django.db.models import Q , F
 from .models import *
 
+
+def query(request):
+    # data = Product.objects.filter(price = F('quantity') )
+    # data = Product.objects.filter(Q(name__contains="Noah") & Q(price__gte = 100))
+    # data = Product.objects.order_by('name')[0]
+    # data = Product.objects.values_list('id','name').distinct()
+    # data = Product.objects.defer("brand")
+    # data = Product.objects.select_related('brand').all()
+    data = Product.objects.prefetch_related('brand').all()
+   
+    
+    return render(request,'product/query.html',{'data':data})
 
 
 class Home(ListView):
@@ -31,15 +44,6 @@ class BrandList(ListView):
 
    
     
-# class BrandDetail(DetailView):
-#     model = Brand
-    
- 
-#     def get_queryset(self):
-#         queryset = Brand.objects.filter(slug=self.kwargs['slug']).annotate(product_count=Count('product_brand'))
-#         return queryset
-
-
 class BrandDetail(ListView):
     model = Product
     template_name = 'product/brand_detail.html'
