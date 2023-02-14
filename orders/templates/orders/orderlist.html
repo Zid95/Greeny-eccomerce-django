@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'en/css/orderlist.css' %}">
+{% endblock css %}
+
+{% block body %}         
+       <!--=====================================
+                    BANNER PART START
+        =======================================-->
+        <section class="inner-section single-banner" style="background: url(images/single-banner.jpg) no-repeat center;">
+            <div class="container">
+                <h2>Order History</h2>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Orderlist</li>
+                </ol>
+            </div>
+        </section>
+        <!--=====================================
+                    BANNER PART END
+        =======================================-->
+
+
+        <!--=====================================
+                    ORDERLIST PART START
+        =======================================-->
+        <section class="inner-section orderlist-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="orderlist-filter">
+                            <h5>total order <span>- ({{orders|length}})</span></h5>
+                            <div class="filter-short">
+                                <label class="form-label">short by:</label>
+                                <select class="form-select">
+                                    <option value="all" selected>all order</option>
+                                    <option value="recieved">recieved order</option>
+                                    <option value="processed">processed order</option>
+                                    <option value="shipped">shipped order</option>
+                                    <option value="delivered">delivered order</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% for order in orders %}
+                        <div class="orderlist">
+                            <div class="orderlist-head">
+                                <h5>order#01</h5>
+                                <h5>order {{order.order_status}}</h5>
+                            </div>
+                            <div class="orderlist-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="order-track">
+                                            <ul class="order-track-list">
+                                                <li class="order-track-item {% if order.order_status == 'Recieved' or order.order_status == 'Processed' or  order.order_status == 'Shipped' or order.order_status == 'Delivered'   %} active {% endif %}">
+                                                    <i class="icofont-{% if order.order_status == 'Recieved' or order.order_status == 'Processed' or  order.order_status == 'Shipped' or order.order_status == 'Delivered' %}check{%else%}close{% endif %}"></i>
+                                                    <span>order recieved</span>
+                                                </li>
+                                                <li class="order-track-item {% if order.order_status == 'Processed' or  order.order_status == 'Shipped' or order.order_status == 'Delivered'   %} active {% endif %}">
+                                                    <i class="icofont-{% if order.order_status == 'Processed' or  order.order_status == 'Shipped' or order.order_status == 'Delivered'   %}check{%else%}close{% endif %}"></i>
+                                                    <span>order processed</span>
+                                                </li>
+                                                <li class="order-track-item {% if order.order_status == 'Shipped' or order.order_status == 'Delivered'   %} active {% endif %}">
+                                                    <i class="icofont-{% if order.order_status == 'Shipped' or order.order_status == 'Delivered' %}check{%else%}close{% endif %}"></i>
+                                                    <span>order shipped</span>
+                                                </li>
+                                                <li class="order-track-item {% if order.order_status == 'Delivered' %}active {% endif %}">
+                                                    <i class="icofont-{% if order.order_status == 'Delivered' %}check{%else%}close{% endif %}"></i>
+                                                    <span>order delivered</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <ul class="orderlist-details">
+                                            <li>
+                                                <h6>order id</h6>
+                                                <p>{{order.order_code}}</p>
+                                            </li>
+                                            <li>
+                                                <h6>Total Item</h6>
+                                                    <p>{{order.order_detail.all|length}} Items</p>
+                                            </li>
+                                            <li>
+                                                <h6>Order Time</h6>
+                                                <p>{{order.order_date | date:'jS F o'  }}</p>
+                                            </li>
+                                            <li>
+                                                <h6>Delivery Time</h6>
+                                                <p> {{order.delivery_date}} </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <ul class="orderlist-details">
+                                            <li>
+                                                <h6>Sub Total</h6>
+                                                <p>$10,864.00</p>
+                                            </li>
+                                            <li>
+                                                <h6>discount</h6>
+                                                <p>$20.00</p>
+                                            </li>
+                                            <li>
+                                                <h6>delivery fee</h6>
+                                                <p>$49.00</p>
+                                            </li>
+                                            <li>
+                                                <h6>Total<small>(Incl. VAT)</small></h6>
+                                                <p>$10,874.00</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="orderlist-deliver">
+                                            <h6>Delivery location</h6>
+                                            <p>jalkuri, fatullah, narayanganj-1420. word no-09, road no-17/A</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="table-scroll">
+                                            <table class="table-list">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Serial</th>
+                                                        <th scope="col">Product</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">brand</th>
+                                                        <th scope="col">quantity</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for product in order.order_detail.all %}
+                                                        <tr>
+                                                            <td class="table-serial"><h6>{{forloop.counter}}</h6></td>
+                                                            <td class="table-image"><img src=" {{product.product.image.url}} " alt="product"></td>
+                                                            <td class="table-name"><h6>{{product.product}}</h6></td>
+                                                            <td class="table-price"><h6>${{product.price}}<small>/kilo</small></h6></td>
+                                                            <td class="table-brand"><h6>{{product.product.brand}}</h6></td>
+                                                            <td class="table-quantity"><h6>{{product.quantity}}</h6></td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        
+                        {% if is_paginated %}
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }} "><i class="fas fa-long-arrow-alt-left"></i></a></li>
+                            {% endif %}
+                            {% for i in paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+                                {% else %}    
+                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-long-arrow-alt-right"></i></a></li>
+                            {% endif %}
+                        {% endif %}
+                        </ul>
+                    
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================
+                    ORDERLIST PART END
+        =======================================-->
+
+{% endblock body %}
