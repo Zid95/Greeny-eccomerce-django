@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
+from django.db.models.aggregates import Avg
 
 
 PRODUCT_FLAG = (
@@ -31,6 +32,10 @@ class Product(models.Model):
     def save(self,*args, **kwargs):
         self.slug = slugify(self.name)
         super(Product,self).save(*args, **kwargs)
+
+    def get_avg_rate(self):
+        avg = self.product_review.aggregate(rate_avg=Avg('rate'))
+        return avg
 
 
 

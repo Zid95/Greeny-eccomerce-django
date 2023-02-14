@@ -9,12 +9,14 @@
 <body>
     <h1> Debug</h1>
 
+    {{data}}
     <ul>
-        {% for item in data %}
+        
+          {% comment %} {% for item in data %}
         <li> 
              {{item}} - {{item.brand}} 
         </li>
-        {% endfor %}  
+        {% endfor %}     {% endcomment %}
 
     </ul>
 
