@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render ,redirect 
+from django.urls import reverse
 from django.views.generic import *
 from django.db.models import Q , F , Value , Func , ExpressionWrapper ,DecimalField
 from django.db.models.aggregates import Sum , Avg ,Max , Min ,Count
 from django.db.models.functions import Concat 
+from django.http import HttpResponse
 from .models import *
+from .forms import *
 
 
 def query(request):
@@ -43,6 +46,21 @@ class ProductDetail(DetailView):
     model = Product
     template_name = 'product/single_product.html'
     context_object_name = 'pro'
+
+
+def add_review(request,slug):
+    product = Product.objects.get(slug=slug)
+    if request.method == 'POST':
+        form = ReviewsForm(request.POST)
+        if form.is_valid():
+            if Reviews.objects.filter(user=request.user).exists():
+                return HttpResponse("<h1> you have already rating </h1>")
+            else:
+                myform = form.save(commit=False)
+                myform.user = request.user
+                myform.product = product
+                myform.save()
+    return redirect(reverse('product:single_product',kwargs={'slug':slug}))
 
 
 class BrandList(ListView):
