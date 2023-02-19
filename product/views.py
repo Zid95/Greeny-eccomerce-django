@@ -49,6 +49,13 @@ class ProductDetail(DetailView):
     template_name = 'product/single_product.html'
     context_object_name = 'pro'
 
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['reviews'] = Reviews.objects.filter(product=self.get_object())
+        return context
+
+
+
 
 def add_review(request,slug):
     product = Product.objects.get(slug=slug)
