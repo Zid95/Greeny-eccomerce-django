@@ -7,6 +7,8 @@ from django.db.models.functions import Concat
 from django.http import HttpResponse
 from .models import *
 from .forms import *
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 
 
 def query(request):
@@ -53,14 +55,16 @@ def add_review(request,slug):
     if request.method == 'POST':
         form = ReviewsForm(request.POST)
         if form.is_valid():
-            if Reviews.objects.filter(user=request.user).exists():
-                return HttpResponse("<h1> you have already rating </h1>")
-            else:
-                myform = form.save(commit=False)
-                myform.user = request.user
-                myform.product = product
-                myform.save()
-    return redirect(reverse('product:single_product',kwargs={'slug':slug}))
+            myform = form.save(commit=False)
+            myform.user = request.user
+            myform.product = product
+            myform.save()
+    
+            reviews = Reviews.objects.filter(product=product)
+            html = render_to_string('include/all_reviews.html',{'reviews':reviews , request:request})
+            return JsonResponse({'result':html})
+
+
 
 
 class BrandList(ListView):
