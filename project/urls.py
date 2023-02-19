@@ -17,13 +17,13 @@ from django.contrib import admin
 from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
-from product.views import Home
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',Home.as_view(),name='home'),
     path('product/', include('product.urls',namespace='product')),
     path('orders/',include('orders.urls',namespace='orders')),
+    path('',include('settings.urls',namespace='settings')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]
 
