@@ -18,6 +18,8 @@ urlpatterns = [
     # path('api/list',productlist_api,name='productlist_api'),
     # (class api url)
     path('api/list',ProductListApi.as_view(),name='productlist_api'),  
+    path('api/list/brands',BrandListApi.as_view(),name='brandtlist_api'),  
+    path('api/list/brands/<slug:slug>',BrandDetailApi.as_view(),name='branddetail_api'),  
     path('api/list/<slug:slug>',ProductDetailApi.as_view(),name='productdetail_api'),  
 ]
 
