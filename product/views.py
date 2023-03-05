@@ -32,10 +32,6 @@ def query(request):
     return render(request,'product/query.html',{'data':data})
 
 
-class Home(ListView):
-    model = Product
-    template_name = "index.html"
-
 class ProductList(ListView):
     model = Product
     template_name = 'product/all_products.html'
