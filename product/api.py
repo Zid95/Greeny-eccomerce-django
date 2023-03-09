@@ -5,7 +5,8 @@ from rest_framework import generics
 from .serializers import *
 from .models import *
 from .pagination import CustomPagination
-import django_filters.rest_framework
+from django_filters.rest_framework import DjangoFilterBackend
+from .filter import ProductFilter
 
 
 
@@ -24,8 +25,9 @@ class ProductListApi(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
     pagination_class = CustomPagination
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = ['name', 'brand','price','flag']
+    filter_backends = [DjangoFilterBackend]
+    # filterset_fields = ['name', 'brand','price','flag']
+    filterset_class = ProductFilter
 
 
 # detail / update / delete 
