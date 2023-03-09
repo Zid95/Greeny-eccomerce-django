@@ -5,6 +5,7 @@ from rest_framework import generics
 from .serializers import *
 from .models import *
 from .pagination import CustomPagination
+import django_filters.rest_framework
 
 
 
@@ -23,6 +24,9 @@ class ProductListApi(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
     pagination_class = CustomPagination
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_fields = ['name', 'brand','price','flag']
+
 
 # detail / update / delete 
 # class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
