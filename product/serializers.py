@@ -3,12 +3,14 @@ from .models import Product , Brand , ProductImages , Reviews
 from django.db.models.aggregates import Avg
 
 
+
 class ProductImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImages
         fields = ['image']
 
 class ProductReviewSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
     class Meta:
         model = Reviews
         fields = ['comment','rate','created_at','user']
@@ -20,6 +22,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     avg_rate = serializers.SerializerMethodField()
     review_count = serializers.SerializerMethodField()
     # price_with_tax = serializers.SerializerMethodField(method_name='my_func')
+    
 
 
     class Meta:

@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework import generics
 from .serializers import *
 from .models import *
+from .pagination import CustomPagination
 
 
 
@@ -21,6 +22,7 @@ from .models import *
 class ProductListApi(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
+    pagination_class = CustomPagination
 
 # detail / update / delete 
 # class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
