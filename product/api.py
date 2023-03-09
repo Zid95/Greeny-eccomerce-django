@@ -20,7 +20,7 @@ from .models import *
 
 class ProductListApi(generics.ListAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductListSerializer
 
 # detail / update / delete 
 # class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
@@ -30,7 +30,7 @@ class ProductListApi(generics.ListAPIView):
 
 class ProductDetailApi(generics.RetrieveAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductDetailSerializer
     lookup_field = "slug"
 
 

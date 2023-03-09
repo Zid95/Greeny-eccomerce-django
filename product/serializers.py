@@ -1,10 +1,15 @@
 from rest_framework import serializers
-from .models import Product , Brand
+from .models import Product , Brand , ProductImages
 
 
 
+class ProductImagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImages
+        fields = ['image']
 
-class ProductSerializer(serializers.ModelSerializer):
+
+class ProductListSerializer(serializers.ModelSerializer):
     # brand = BrandSerializer()
     brand = serializers.StringRelatedField()
     price_with_tax = serializers.SerializerMethodField()
@@ -23,13 +28,23 @@ class ProductSerializer(serializers.ModelSerializer):
     #     return product.price * 1.1
 
 
+class ProductDetailSerializer(serializers.ModelSerializer):
+    brand = serializers.StringRelatedField()
+    image = ProductImagesSerializer(source='product_image',many=True)
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+
+
+
 class BrandListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
         fields = '__all__'
 
 class BrandDetailSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(source = 'product_brand',many=True)
+    products = ProductListSerializer(source = 'product_brand',many=True)
     class Meta:
         model = Brand
         fields = '__all__'
