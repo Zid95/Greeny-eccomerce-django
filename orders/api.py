@@ -16,8 +16,26 @@ class OrderListAPI(generics.ListAPIView):
         queryset = self.get_queryset().filter(user=user)
         serializer = OrderSerializer(queryset, many=True)
         return Response(serializer.data)
+
+class CreateOrder(generics.GenericAPIView):
+
+    def get(self,request,*args, **kwargs):
+        user = User.objects.get(username = self.kwargs['username'])
+        cart=Cart.objects.get(user=user, cart_status='Inprogress')
+        cart_data = CartDetail.objects.filter(cart=cart)  
     
-    
+        new_order = Order.objects.create(user=user)
+        for object in cart_data :
+            OrderDetail.objects.create(
+                order = new_order,
+                product = object.product,
+                price = object.price,
+                quantity = object.quantity,
+                total = object.total
+            )
+        cart.cart_status = 'Completed'
+        cart.save()
+        return Response({'status':200,'message':'order created successfully'})
 
 class CartDetailCreatApI(generics.GenericAPIView):
     serializer_class = CartDetailSerializer
