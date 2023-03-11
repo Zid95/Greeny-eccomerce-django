@@ -6,20 +6,28 @@ from django.contrib.auth.models import User
 from product.models import Product
 
 
-class CartApi(generics.GenericAPIView):
-    serializer_class = CartSerializer
+
+class OrderListAPI(generics.ListAPIView):
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
+    
+    def list(self, request,*args, **kwargs):
+        user = User.objects.get(username=self.kwargs['username'])
+        queryset = self.get_queryset().filter(user=user)
+        serializer = OrderSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    
+
+class CartDetailCreatApI(generics.GenericAPIView):
+    serializer_class = CartDetailSerializer
 
     def get(self,request,*args, **kwargs):
         user = User.objects.get(username = self.kwargs['username'])
         cart , created = Cart.objects.get_or_create(user=user, cart_status='Inprogress')
         data = CartSerializer(cart).data
         return Response({'cart':data})
-
-
-
-class CartDetailCreateApi(generics.GenericAPIView):
-    serializer_class = CartDetailSerializer
-
+    
     def post(self,request,*args, **kwargs):
         cart=Cart.objects.get(user=User.objects.get(username= self.kwargs['username']), cart_status='Inprogress')
         product = Product.objects.get( id=request.data['product_id'])
@@ -40,4 +48,9 @@ class CartDetailCreateApi(generics.GenericAPIView):
 
         return Response({'status':200,'message':'Deleted Successfully'})
     
+
+
+
+
+
   

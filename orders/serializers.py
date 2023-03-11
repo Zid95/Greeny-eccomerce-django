@@ -17,3 +17,14 @@ class CartSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class OrderDetailSerailizer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderDetail
+        fields = '__all__'
+        
+        
+class OrderSerializer(serializers.ModelSerializer):
+    order_detail = OrderDetailSerailizer(many=True)
+    class Meta:
+        model = Order
+        fields = ['id','order_code','order_status','delivery_date','order_date','order_detail']
