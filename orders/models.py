@@ -54,13 +54,13 @@ class Cart(models.Model):
 class CartDetail(models.Model):
     cart = models.ForeignKey(Cart,verbose_name=_('order'),related_name='cart_detail',on_delete=models.CASCADE)
     product = models.ForeignKey(Product,verbose_name=_('product'),related_name='cart_product',on_delete=models.SET_NULL,null=True,blank=True)
-    price = models.FloatField(_('price'))
+    price = models.FloatField(_('price'),null=True,blank=True)
     quantity = models.IntegerField(_('quantity'),default=1)
     total = models.FloatField(_('total'),null=True,blank=True)
 
     def __str__(self) -> str:
-        return str(self.order)
+        return str(self.cart)
 
-    def save(self,*args, **kwargs):
-        self.total = self.price * self.quantity
-        super(OrderDetail,self).save(*args, **kwargs)
+    # def save(self,*args, **kwargs):
+    #     self.total = self.price * self.quantity
+    #     super(OrderDetail,self).save(*args, **kwargs)
