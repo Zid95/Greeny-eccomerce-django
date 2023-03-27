@@ -148,3 +148,10 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50 ,
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'] ,
 }
+
+
+LOGIN_REDIRECT_URL = '/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
