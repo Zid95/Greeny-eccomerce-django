@@ -9,7 +9,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User,related_name='profile',on_delete=models.CASCADE)
     image = models.ImageField(upload_to='profile/',default='default.png')
     
-    code = models.CharField(max_length=8 ,default=generate_code)
+    code = models.CharField(max_length=8 ,default=generate_code )
     
     
 @receiver(post_save,sender=User)
