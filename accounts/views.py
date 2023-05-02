@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignupForm, ActivateUser
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 
 
 def signup(request):
@@ -23,8 +24,9 @@ def signup(request):
                 [email],
                 fail_silently=False,
             )
-        return redirect(f"/accounts/{username}/activate")
-
+            return redirect(f"/accounts/{username}/activate")
+        else:
+            return HttpResponse("invalid signup")
     else:
         form = SignupForm()
 
