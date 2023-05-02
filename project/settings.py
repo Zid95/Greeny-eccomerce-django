@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "rest_framework",
     "django_filters",
+    "django_bootstrap5",
 ]
 
 MIDDLEWARE = [
