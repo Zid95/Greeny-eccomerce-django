@@ -79,8 +79,8 @@ class Cart(models.Model):
         _("cart_status"), max_length=12, choices=CART_STATUS, default="Inprogress"
     )
 
-    # def __str__(self) -> str:
-    #     return self.order_code
+    def __str__(self) -> str:
+        return str(self.user)
 
     def cart_total(self):
         total = 0
@@ -92,13 +92,13 @@ class Cart(models.Model):
 class CartDetail(models.Model):
     cart = models.ForeignKey(
         Cart,
-        verbose_name=_("order"),
+        verbose_name=_("cart_detail"),
         related_name="cart_detail",
         on_delete=models.CASCADE,
     )
     product = models.ForeignKey(
         Product,
-        verbose_name=_("product"),
+        verbose_name=_("cart_product"),
         related_name="cart_product",
         on_delete=models.SET_NULL,
         null=True,
@@ -111,6 +111,6 @@ class CartDetail(models.Model):
     def __str__(self) -> str:
         return str(self.cart)
 
-    # def save(self,*args, **kwargs):
-    #     self.total = self.price * self.quantity
-    #     super(OrderDetail,self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.total = round(self.price * self.quantity, 2)
+    #     super(CartDetail, self).save(*args, **kwargs)

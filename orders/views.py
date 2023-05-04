@@ -19,13 +19,13 @@ def add_to_cart(request):
     cart_detail.price = product.price
     cart_detail.total = round(int(quantity) * product.price, 2)
     cart_detail.save()
-    return redirect(f"/products/{product.slug}")
+    return redirect(f"/product/{product.slug}")
 
 
 def remove_from_Cart(request, id):
     cart_detail = CartDetail.objects.get(id=id)
     cart_detail.delete()
-    return redirect("/products")
+    return redirect("/product")
 
 
 def checkout(request):
